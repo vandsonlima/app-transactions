@@ -25,12 +25,11 @@ public class TransactionController {
 
     @Transactional
     @PostMapping("/transactions")
-    public ResponseEntity<String> executeTransaction(@RequestBody @Valid TransactionRequest transactionRequest){
-        //todo: retorno da operacao - TransactionResponse c hateoas
+    public ResponseEntity<TransactionResponse> executeTransaction(@RequestBody @Valid TransactionRequest transactionRequest){
         //todo:hateoas
         logger.info("persit a new transaction", transactionRequest);
         Transaction transaction = transactionRequest.toModel(entityManager);
         entityManager.persist(transaction);
-        return ResponseEntity.ok("Transação efetuada com sucesso");
+        return ResponseEntity.ok().body(new TransactionResponse(transaction));
     }
 }

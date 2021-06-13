@@ -26,7 +26,8 @@ create table if not exists transactions
     references accounts,
     operation_type_id bigint not null
     constraint fkj2jvxwruf2hchy3jj25ne5m07
-    references operation_type
+    references operation_type,
+    event_date timestamp not null
     );
 
 insert into operation_type (description, sign_operation)

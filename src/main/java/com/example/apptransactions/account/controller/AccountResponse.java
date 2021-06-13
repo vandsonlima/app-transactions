@@ -2,8 +2,9 @@ package com.example.apptransactions.account.controller;
 
 import com.example.apptransactions.account.domain.Account;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.springframework.hateoas.RepresentationModel;
 
-public class AccountResponse {
+public class AccountResponse extends RepresentationModel<AccountResponse> {
 
     @JsonProperty(value="account_id")
     private final Long accountId;

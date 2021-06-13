@@ -14,6 +14,9 @@ import javax.transaction.Transactional;
 import javax.validation.Valid;
 import java.util.Optional;
 
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
+
 @RestController
 @RequestMapping("v1")
 public class AccountController {
@@ -25,7 +28,6 @@ public class AccountController {
 
     @GetMapping("/accounts/{id}")
     public AccountResponse getAccount(@PathVariable @Valid Long id) {
-        //todo hateoas
         return Optional.ofNullable(entityManager.find(Account.class, id))
                 .map(AccountResponse::new)
                 .orElseThrow( () -> new ResponseStatusException(HttpStatus.NOT_FOUND));
@@ -33,12 +35,13 @@ public class AccountController {
 
     @Transactional
     @PostMapping("/accounts")
-    public ResponseEntity createAccount(@RequestBody @Valid AccountRequest accountRequest){
+    public ResponseEntity<AccountResponse> createAccount(@RequestBody @Valid AccountRequest accountRequest){
+        logger.info("including new account", accountRequest);
+
         Account account = accountRequest.toModel();
-        logger.info("including new account", account);
         entityManager.persist(account);
-        //todo: hateoas
-        //todo: tratamento de retorno de erro 500 e de responsestatusException
-        return ResponseEntity.ok(new AccountResponse(account));
+        return ResponseEntity.ok().body(new AccountResponse(account)
+                .add(linkTo(methodOn(AccountController.class).getAccount(account.getId()))
+                .withRel("/accounts/{id}")));
     }
 }

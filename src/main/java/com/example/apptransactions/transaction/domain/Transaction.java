@@ -7,6 +7,8 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 import java.math.BigDecimal;
+import java.util.Date;
+import java.util.Objects;
 
 @Entity
 @Table(name = "transactions")
@@ -22,6 +24,8 @@ public class Transaction {
     @NotNull
     private BigDecimal amount;
 
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date eventDate;
 
     public Transaction() {
     }
@@ -34,5 +38,35 @@ public class Transaction {
         this.account = account;
         this.operationType = operationType;
         this.amount = operationType.getSignOperation().calcvalue(amount);
+        eventDate = new Date();
+    }
+
+    public Account getAccount() {
+        return account;
+    }
+
+    public OperationType getOperationType() {
+        return operationType;
+    }
+
+    public BigDecimal getAmount() {
+        return amount;
+    }
+
+    public Date getEventDate() {
+        return eventDate;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Transaction that = (Transaction) o;
+        return Objects.equals(id, that.id) && Objects.equals(account, that.account) && Objects.equals(operationType, that.operationType) && Objects.equals(amount, that.amount) && Objects.equals(eventDate, that.eventDate);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, account, operationType, amount, eventDate);
     }
 }
