@@ -1,6 +1,6 @@
-package com.example.apptransactions.controller;
+package com.example.apptransactions.account.controller;
 
-import com.example.apptransactions.domain.Account;
+import com.example.apptransactions.account.domain.Account;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class AccountResponse {
@@ -22,5 +22,13 @@ public class AccountResponse {
 
     public String getDocumentNumber() {
         return documentNumber;
+    }
+
+    @Override
+    public String toString() {
+        return "AccountResponse{" +
+                "accountId=" + accountId +
+                ", documentNumber='" + documentNumber + '\'' +
+                '}';
     }
 }

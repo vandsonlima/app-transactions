@@ -1,4 +1,4 @@
-package com.example.apptransactions.domain;
+package com.example.apptransactions.account.domain;
 
 import org.springframework.util.Assert;
 
@@ -15,7 +15,7 @@ public class Account {
     private Long id;
 
     @NotBlank
-    @Column(unique = true)
+    @Column(unique = true, name = "document_number", nullable = false)
     private String documentNumber;
 
     public Account(@NotBlank String documentNumber) {
