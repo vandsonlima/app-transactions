@@ -15,8 +15,7 @@ public class ValidationErrorsOutput {
     }
 
     public void addFieldError(String field, String message){
-        FieldErrorOutput fieldError = new FieldErrorOutput(field, message);
-        fieldErrors.add(fieldError);
+        fieldErrors.add(new FieldErrorOutput(field, message));
     }
 
     public List<String> getGlobalErrorMessages() {

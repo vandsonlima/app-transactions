@@ -38,7 +38,7 @@ public class AccountController {
     public ResponseEntity<AccountResponse> createAccount(@RequestBody @Valid AccountRequest accountRequest){
         logger.info("including new account", accountRequest);
 
-        Account account = accountRequest.toModel();
+        var account = accountRequest.toModel();
         entityManager.persist(account);
         return ResponseEntity.ok().body(new AccountResponse(account)
                 .add(linkTo(methodOn(AccountController.class).getAccount(account.getId()))

@@ -43,7 +43,7 @@ public class ValidationErrorHandler {
     }
 
     private ValidationErrorsOutput buildValidationErrors(List<ObjectError> globalErrors, List<FieldError> fieldErrors) {
-        ValidationErrorsOutput validationErrorsOutput = new ValidationErrorsOutput();
+        var validationErrorsOutput = new ValidationErrorsOutput();
         globalErrors.forEach(globalError -> validationErrorsOutput.addError(getErrorMessage(globalError)));
         fieldErrors.forEach(fieldError -> validationErrorsOutput.addFieldError(fieldError.getField(), getErrorMessage(fieldError)));
         return validationErrorsOutput;

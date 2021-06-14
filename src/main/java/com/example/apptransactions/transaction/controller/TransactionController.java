@@ -26,9 +26,8 @@ public class TransactionController {
     @Transactional
     @PostMapping("/transactions")
     public ResponseEntity<TransactionResponse> executeTransaction(@RequestBody @Valid TransactionRequest transactionRequest){
-        //todo:hateoas
-        logger.info("persit a new transaction", transactionRequest);
-        Transaction transaction = transactionRequest.toModel(entityManager);
+        logger.info("permit a new transaction", transactionRequest);
+        var transaction = transactionRequest.toModel(entityManager);
         entityManager.persist(transaction);
         return ResponseEntity.ok().body(new TransactionResponse(transaction));
     }
