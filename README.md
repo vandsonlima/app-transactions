@@ -11,12 +11,13 @@
 * Java 14
 * Spring Boot
 * JUnit 5
+* MockMvc
 * H2 Database
 * Maven
 * Flyway Database Migrations  
 * PostgreSQL
 
-O projeto utiliza o banco H2 para os profiles dev e test, e para produção é utilizado o banco relacional PostgreSQL.
+O projeto utiliza o banco H2 para os profiles dev e test, e para produção é utilizado  o banco relacional PostgreSQL.
 O projeto está containerizado em docker e para sua execução será necessário:
 - OpenJDK 14 (https://adoptopenjdk.net/)
 - Docker (https://docs.docker.com/engine/install/)
@@ -33,12 +34,13 @@ O projeto está containerizado em docker e para sua execução será necessário
 
 * Clonar ou baixar o [projeto](https://github.com/vandsonlima/app-transactions.git) 
   e no diretório do projeto **executar o comando** ``` mvnw test ```
-
+  
+  
 #### Produção
 * Clonar ou baixar o [projeto](https://github.com/vandsonlima/app-transactions.git) 
   e no diretório do projeto **executar o comando** ``` docker-compose up --detach```
  
-* O comando acima irá executar os containers da aplicação e do banco de dados Postgresql. 
+* O comando acima irá executar os containers de build e execução (multi-stage) e do banco de dados Postgresql. 
 
 ### Como acessar os recursos
 
