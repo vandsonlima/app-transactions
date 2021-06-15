@@ -5,7 +5,6 @@ import org.springframework.util.Assert;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Positive;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.Objects;
@@ -27,12 +26,14 @@ public class Transaction {
     @Temporal(TemporalType.TIMESTAMP)
     private Date eventDate;
 
+    @Deprecated
     public Transaction() {
     }
 
     public Transaction(Account account, OperationType operationType, BigDecimal amount) {
         Assert.notNull(account, "Account must be not null");
         Assert.notNull(operationType, "OperationType must be not null");
+        Assert.notNull(amount, "Amount must be not null");
         Assert.isTrue(amount.compareTo(new BigDecimal("0")) > 0, "Amount must be greater than zero");
 
         this.account = account;

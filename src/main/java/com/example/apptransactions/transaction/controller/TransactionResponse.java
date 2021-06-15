@@ -8,14 +8,17 @@ import java.util.Date;
 
 public class TransactionResponse {
     @JsonProperty("account_id")
-    private final Long accountId;
+    private Long accountId;
 
     @JsonProperty("operation_type_id")
-    private final Long operationTypeId;
+    private Long operationTypeId;
 
-    private final BigDecimal amount;
+    private BigDecimal amount;
 
     private Date eventDate;
+
+    public TransactionResponse() {
+    }
 
     public TransactionResponse(Transaction transaction) {
         this.accountId = transaction.getAccount().getId();

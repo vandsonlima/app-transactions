@@ -7,10 +7,17 @@ import org.springframework.hateoas.RepresentationModel;
 public class AccountResponse extends RepresentationModel<AccountResponse> {
 
     @JsonProperty(value="account_id")
-    private final Long accountId;
+    private Long accountId;
 
     @JsonProperty(value="document_number")
-    private final String documentNumber;
+    private String documentNumber;
+
+    public AccountResponse() {
+    }
+
+    public AccountResponse(String documentNumber) {
+        this.documentNumber = documentNumber;
+    }
 
     public AccountResponse(Account account) {
         this.accountId = account.getId();

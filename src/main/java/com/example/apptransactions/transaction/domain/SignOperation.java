@@ -5,15 +5,15 @@ import java.math.BigDecimal;
 public enum SignOperation {
     POSITIVE{
         @Override
-        BigDecimal calcvalue(BigDecimal valuePositive) {
+        public BigDecimal calcvalue(BigDecimal valuePositive) {
             return valuePositive;
         }
     }, NEGATIVE {
         @Override
-        BigDecimal calcvalue(BigDecimal valueNegative) {
+        public BigDecimal calcvalue(BigDecimal valueNegative) {
             return valueNegative.negate();
         }
     };
 
-    abstract BigDecimal calcvalue(BigDecimal value);
+    public abstract BigDecimal calcvalue(BigDecimal value);
 }

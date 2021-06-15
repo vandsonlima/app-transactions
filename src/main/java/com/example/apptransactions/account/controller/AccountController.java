@@ -1,6 +1,6 @@
 package com.example.apptransactions.account.controller;
 
-import com.example.apptransactions.account.domain.Account;
+import com.example.apptransactions.account.repository.AccountRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -8,8 +8,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 import javax.validation.Valid;
 import java.util.Optional;
@@ -22,13 +20,15 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 public class AccountController {
 
     private final Logger logger = LoggerFactory.getLogger(AccountController.class);
+    private final AccountRepository accountRepository;
 
-    @PersistenceContext
-    private EntityManager entityManager;
+    public AccountController(AccountRepository accountRepository) {
+        this.accountRepository = accountRepository;
+    }
 
     @GetMapping("/accounts/{id}")
     public AccountResponse getAccount(@PathVariable @Valid Long id) {
-        return Optional.ofNullable(entityManager.find(Account.class, id))
+        return accountRepository.findById(id)
                 .map(AccountResponse::new)
                 .orElseThrow( () -> new ResponseStatusException(HttpStatus.NOT_FOUND));
     }
@@ -37,10 +37,8 @@ public class AccountController {
     @PostMapping("/accounts")
     public ResponseEntity<AccountResponse> createAccount(@RequestBody @Valid AccountRequest accountRequest){
         logger.info("including new account", accountRequest);
-
-        var account = accountRequest.toModel();
-        entityManager.persist(account);
-        return ResponseEntity.ok().body(new AccountResponse(account)
+        var account = accountRepository.save(accountRequest.toModel());
+        return ResponseEntity.status(HttpStatus.CREATED).body(new AccountResponse(account)
                 .add(linkTo(methodOn(AccountController.class).getAccount(account.getId()))
                 .withRel("/accounts/{id}")));
     }

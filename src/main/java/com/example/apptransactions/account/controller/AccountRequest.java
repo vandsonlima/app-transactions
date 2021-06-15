@@ -16,6 +16,10 @@ public class AccountRequest {
     public AccountRequest() {
     }
 
+    public AccountRequest(@NotBlank String document) {
+        this.document = document;
+    }
+
     public String getDocument() {
         return document;
     }

@@ -3,15 +3,14 @@ package com.example.apptransactions.transaction.controller;
 import com.example.apptransactions.account.domain.Account;
 import com.example.apptransactions.commons.validation.ExistsId;
 import com.example.apptransactions.transaction.domain.OperationType;
-import com.example.apptransactions.transaction.domain.Transaction;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import javax.persistence.EntityManager;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 import javax.validation.constraints.PositiveOrZero;
 import java.math.BigDecimal;
 
+@SuppressWarnings("DefaultAnnotationParam")
 public class TransactionRequest {
 
     @NotNull
@@ -35,9 +34,16 @@ public class TransactionRequest {
         this.amount = amount;
     }
 
-    public Transaction toModel(EntityManager entityManager) {
-        Account account = entityManager.find(Account.class, accountId);
-        OperationType operationType = entityManager.find(OperationType.class, operationTypeId);
-        return new Transaction(account, operationType, amount);
+    public Long getAccountId() {
+        return accountId;
     }
+
+    public Long getOperationTypeId() {
+        return operationTypeId;
+    }
+
+    public BigDecimal getAmount() {
+        return amount;
+    }
+
 }

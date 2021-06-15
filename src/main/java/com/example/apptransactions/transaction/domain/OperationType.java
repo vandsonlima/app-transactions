@@ -15,7 +15,14 @@ public class OperationType {
     @Enumerated(EnumType.STRING)
     private SignOperation signOperation;
 
+    @Deprecated
     public OperationType() {
+    }
+
+    public OperationType(Long id, String description, SignOperation signOperation) {
+        this.id = id;
+        this.description = description;
+        this.signOperation = signOperation;
     }
 
     public Long getId() {
