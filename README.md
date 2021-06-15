@@ -3,7 +3,8 @@
 ### Descrição
  app-transaction é responsável pelo gerenciamento de contas e transações, contendo os seguintes recursos:
 
- * Criação de conta (Accounts)
+ * Consulta de contas (Accounts/id)
+ * Criação de contas (Accounts)
  * Execução de Transações (Transactions) de crédito e débito
 
 ### Tecnologias Utilizadas
