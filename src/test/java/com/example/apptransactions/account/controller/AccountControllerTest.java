@@ -2,7 +2,7 @@ package com.example.apptransactions.account.controller;
 
 import com.example.apptransactions.GenericTest;
 import com.example.apptransactions.account.domain.AccountFactory;
-import com.example.apptransactions.account.repository.AccountRepository;
+import com.example.apptransactions.account.service.AccountService;
 import com.example.apptransactions.commons.exception.ValidationErrorsOutput;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.DisplayName;
@@ -29,7 +29,7 @@ class AccountControllerTest extends GenericTest {
     ObjectMapper objectMapper;
 
     @Autowired
-    AccountRepository accountRepository;
+    AccountService accountService;
 
     AccountFactory accountFactory = new AccountFactory();
 
@@ -69,7 +69,7 @@ class AccountControllerTest extends GenericTest {
     @DisplayName("test create an acccount with same document number")
     void createAccountWithAnEqualDocument() throws Exception {
         var account = accountFactory.newAccount(UUID.randomUUID().toString());
-        accountRepository.save(account);
+        accountService.save(account);
 
         var accountRequest = new AccountRequest(account.getDocumentNumber());
 
@@ -90,7 +90,7 @@ class AccountControllerTest extends GenericTest {
     @DisplayName("get a registered account")
     void getAnRegisteredAccount() throws Exception {
         var account = accountFactory.newAccount(UUID.randomUUID().toString());
-        accountRepository.save(account);
+        accountService.save(account);
 
         var response = mockMvc.perform(
                 get("/v1/accounts/{id}", account.getId()))

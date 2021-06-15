@@ -1,6 +1,6 @@
 package com.example.apptransactions.account.controller;
 
-import com.example.apptransactions.account.repository.AccountRepository;
+import com.example.apptransactions.account.service.AccountService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -19,15 +19,15 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 public class AccountController {
 
     private final Logger logger = LoggerFactory.getLogger(AccountController.class);
-    private final AccountRepository accountRepository;
+    private final AccountService accountService;
 
-    public AccountController(AccountRepository accountRepository) {
-        this.accountRepository = accountRepository;
+    public AccountController( AccountService accountService) {
+        this.accountService = accountService;
     }
 
     @GetMapping("/accounts/{id}")
     public AccountResponse getAccount(@PathVariable @Valid Long id) {
-        return accountRepository.findById(id)
+        return accountService.getById(id)
                 .map(AccountResponse::new)
                 .orElseThrow( () -> new ResponseStatusException(HttpStatus.NOT_FOUND));
     }
@@ -36,7 +36,7 @@ public class AccountController {
     @PostMapping("/accounts")
     public ResponseEntity<AccountResponse> createAccount(@RequestBody @Valid AccountRequest accountRequest){
         logger.info("including new account", accountRequest);
-        var account = accountRepository.save(accountRequest.toModel());
+        var account = accountService.save(accountRequest.toModel());
         return ResponseEntity.status(HttpStatus.CREATED).body(new AccountResponse(account)
                 .add(linkTo(methodOn(AccountController.class).getAccount(account.getId()))
                 .withRel("/accounts/{id}")));

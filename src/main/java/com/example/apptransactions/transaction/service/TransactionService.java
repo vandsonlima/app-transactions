@@ -6,6 +6,9 @@ import com.example.apptransactions.transaction.domain.Transaction;
 import com.example.apptransactions.transaction.repository.OperationTypeRepository;
 import com.example.apptransactions.transaction.repository.TransactionsRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.util.Assert;
+
+import javax.validation.constraints.NotNull;
 
 @Service
 public class TransactionService {
@@ -23,7 +26,8 @@ public class TransactionService {
         this.operationTypeRepository = operationTypeRepository;
     }
 
-    public Transaction create(TransactionRequest transactionRequest) {
+    public Transaction create(@NotNull TransactionRequest transactionRequest) {
+        Assert.notNull(transactionRequest, "transaction request must be not null");
 
         var account = accountRepository.findById(transactionRequest.getAccountId())
                 .orElseThrow(IllegalArgumentException::new);
