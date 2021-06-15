@@ -4,18 +4,18 @@ services:
     container_name: postgresql-server
     image: postgres:13-alpine
     environment:
-      POSTGRES_PASSWORD: app-transacion
-      POSTGRES_USER: app-transacion
+      POSTGRES_PASSWORD: app-transaction
+      POSTGRES_USER: app-transaction
     ports:
       - "5432:5432"
-#  demo-app:
-#    container_name: demo-app
-#    build: .
-#    environment:
-#      POSTGRESQL_URL: jdbc:postgresql://postgresql-server/demoapp
-#      POSTGRESQL_USERNAME: demoapp
-#      POSTGRESQL_PASSWORD: demoapp
-#    ports:
-#      - "8080:8080"
-#    depends_on:
-#      - postgresql-server
+  app-transaction:
+    container_name: app-transaction
+    build: .
+    environment:
+      POSTGRESQL_URL: jdbc:postgresql://postgresql-server/app-transaction
+      POSTGRESQL_USERNAME: app-transaction
+      POSTGRESQL_PASSWORD: app-transaction
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgresql-server

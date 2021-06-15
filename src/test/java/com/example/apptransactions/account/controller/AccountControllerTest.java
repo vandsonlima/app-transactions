@@ -1,7 +1,6 @@
 package com.example.apptransactions.account.controller;
 
 import com.example.apptransactions.GenericTest;
-import com.example.apptransactions.account.domain.Account;
 import com.example.apptransactions.account.domain.AccountFactory;
 import com.example.apptransactions.account.repository.AccountRepository;
 import com.example.apptransactions.commons.exception.ValidationErrorsOutput;

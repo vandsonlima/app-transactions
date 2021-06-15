@@ -10,7 +10,6 @@ import javax.validation.constraints.Positive;
 import javax.validation.constraints.PositiveOrZero;
 import java.math.BigDecimal;
 
-@SuppressWarnings("DefaultAnnotationParam")
 public class TransactionRequest {
 
     @NotNull

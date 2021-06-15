@@ -5,9 +5,7 @@ import java.util.UUID;
 public class AccountFactory {
 
     public Account getNewAccount(){
-        var account = new Account(UUID.randomUUID().toString());
-        account.setId(1L);
-        return account;
+        return new Account(UUID.randomUUID().toString());
     }
 
     public Account newAccount(String documentNumber){
