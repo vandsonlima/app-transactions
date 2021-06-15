@@ -25,25 +25,25 @@ O projeto está containerizado em docker e para sua execução será necessário
 ### Execução do projeto
 
 #### Desenvolvimento
-- Clonar ou baixar o [projeto](https://github.com/vandsonlima/app-transactions.git) 
-  e executar no diretório o comando
+- Clonar ou baixar o [projeto](https://github.com/vandsonlima/app-transactions.git)
+  e no diretório do projeto **executar o comando**
 ``` mvnw spring-boot:run -Dspring-boot.run.profiles=dev ```
  
 #### Testes
 
 * Clonar ou baixar o [projeto](https://github.com/vandsonlima/app-transactions.git) 
-  e executar no diretório o comando ``` mvnw test ```
+  e no diretório do projeto **executar o comando** ``` mvnw test ```
 
 #### Produção
 * Clonar ou baixar o [projeto](https://github.com/vandsonlima/app-transactions.git) 
-  e executar no diretório o comando ``` docker-compose up --detach```
-
-O comando acima irá executar os containers da aplicação e do banco de dados Postgresql seguindo os parametros passados no docker-compose.yaml
+  e no diretório do projeto **executar o comando** ``` docker-compose up --detach```
+ 
+* O comando acima irá executar os containers da aplicação e do banco de dados Postgresql. 
 
 ### Como acessar os recursos
 
-* Acessar os endpoints a partir da url http://localhost:8080, utilizando o terminal através dos comandos abaixo, ou 
-importando o comando abaixo na ferramenta de testes de API de sua preferência (e.g. insomnia, postman)
+* Acessar os endpoints a partir da url **http://localhost:8080**, e **executar os comandos abaixo via terminal**, ou 
+importar o comando abaixo na ferramenta de testes de API de sua preferência (e.g. insomnia, postman)
   
 - GET /v1/accounts/{account_id}
 ```  
