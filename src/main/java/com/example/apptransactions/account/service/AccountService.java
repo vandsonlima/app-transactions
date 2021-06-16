@@ -18,11 +18,23 @@ public class AccountService {
         this.accountRepository = accountRepository;
     }
 
+    /**
+     * returns an {@link Account} by given id
+     *
+     * @param id @NotNull
+     * @return Account
+     */
     public Optional<Account> getById(@NotNull Long id) {
         Assert.notNull(id, "the account id must be not null");
         return accountRepository.findById(id);
     }
 
+    /**
+     * create an new {@link Account}
+     *
+     * @param account @NotNull
+     * @return Account
+     */
     public Account save(@NotNull Account account) {
         Assert.notNull(account, "the account must be not null");
         return accountRepository.save(account);

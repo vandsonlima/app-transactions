@@ -26,6 +26,12 @@ public class TransactionService {
         this.operationTypeRepository = operationTypeRepository;
     }
 
+    /**
+     * create a new {@link Transaction}
+     *
+     * @param transactionRequest {@link TransactionRequest} @NotNull
+     * @return {@link Transaction}
+     */
     public Transaction create(@NotNull TransactionRequest transactionRequest) {
         Assert.notNull(transactionRequest, "transaction request must be not null");
 
